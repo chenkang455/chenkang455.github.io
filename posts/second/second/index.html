@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>最优化作业2 | ChenK&#39;s Blog</title>
+
+    
+
+
+
+<meta name="author" content="Chenk" />
+<meta name="description" content="第二次作业 阻尼牛顿法 由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能
+扩充函数类 import numpy as np class Function:  def __init__(self,f,delta) -&amp;gt; None:  self.delta = delta  self.f = f  def cal_val(self,val):  return self.f(val)  #求偏导  def part_1(self,index,val):  #! 不改变原值  val = list(val)  # 原函数值  f1 = self.f(val)  val [index] &#43;= self.delta  # 自变量改变delta后的函数值  f2 = self.f(val)  return (f2 - f1)/self.delta  #求二阶导  def part_2(self,index1,index2,val):  #!" />
+
+
+
+<meta name="generator" content="Hugo 0.93.2" />
+
+<link rel="canonical" href="https://chenkang455.github.io/posts/second/second/" />
+
+
+<meta property="og:title" content="最优化作业2" />
+<meta property="og:description" content="第二次作业 阻尼牛顿法 由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能
+扩充函数类 import numpy as np class Function:  def __init__(self,f,delta) -&gt; None:  self.delta = delta  self.f = f  def cal_val(self,val):  return self.f(val)  #求偏导  def part_1(self,index,val):  #! 不改变原值  val = list(val)  # 原函数值  f1 = self.f(val)  val [index] &#43;= self.delta  # 自变量改变delta后的函数值  f2 = self.f(val)  return (f2 - f1)/self.delta  #求二阶导  def part_2(self,index1,index2,val):  #!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chenkang455.github.io/posts/second/second/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-05T19:09:40+08:00" />
+<meta property="article:modified_time" content="2022-03-05T19:09:40+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="最优化作业2"/>
+<meta name="twitter:description" content="第二次作业 阻尼牛顿法 由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能
+扩充函数类 import numpy as np class Function:  def __init__(self,f,delta) -&gt; None:  self.delta = delta  self.f = f  def cal_val(self,val):  return self.f(val)  #求偏导  def part_1(self,index,val):  #! 不改变原值  val = list(val)  # 原函数值  f1 = self.f(val)  val [index] &#43;= self.delta  # 自变量改变delta后的函数值  f2 = self.f(val)  return (f2 - f1)/self.delta  #求二阶导  def part_2(self,index1,index2,val):  #!"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" integrity="sha256-UXesixbeLkB/UYxVTzuj/gg3+LMzgwAmg3zD+C4ZASQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css" integrity="sha256-WKijf8KI68sbq8Znd6yMepIuFF0wdWfIt6gk3JWcQfk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+  a:not(.item, .ui.button) {
+    color: seagreen !important;
+  }
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: #f7f7f7;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+
+
+
+    
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://chenkang455.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#阻尼牛顿法">阻尼牛顿法</a>
+      <ul>
+        <li><a href="#扩充函数类">扩充函数类</a></li>
+        <li><a href="#运行程序">运行程序</a></li>
+        <li><a href="#第一题运算结果">第一题运算结果</a></li>
+        <li><a href="#第一题图像展示">第一题图像展示</a></li>
+        <li><a href="#第二题运算结果">第二题运算结果</a></li>
+        <li><a href="#第二题图像">第二题图像</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui segment">
+      <header>
+        <h1 class="ui large header">最优化作业2<span class="sub header">
+            <span class="left">
+              @
+              
+                Chenk
+              
+
+              | 
+                  
+                    星期六，三月 5 日，2022 年
+                  
+                
+
+              | 3 分钟阅读
+
+              
+              | 更新于
+                
+                  
+                    星期六，三月 5 日，2022 年
+                  
+                
+              
+            </span>
+
+            
+            <span class="dream-share">
+  <a href="#" class="save-as-image" title="保存为图片" onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=%e6%9c%80%e4%bc%98%e5%8c%96%e4%bd%9c%e4%b8%9a2&url=https%3a%2f%2fchenkang455.github.io%2fposts%2fsecond%2fsecond%2f" title="Twitter">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fchenkang455.github.io%2fposts%2fsecond%2fsecond%2f" title="Facebook">
+    <i class="facebook icon"></i>
+  </a>
+</span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <h1 id="第二次作业">第二次作业</h1>
+<h2 id="阻尼牛顿法">阻尼牛顿法</h2>
+<p>由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能</p>
+<h3 id="扩充函数类">扩充函数类</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Function</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self,f,delta) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>delta <span style="color:#f92672">=</span> delta 
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>f <span style="color:#f92672">=</span> f
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_val</span>(self,val):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>f(val)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#求偏导</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_1</span>(self,index,val):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#! 不改变原值</span>
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">=</span> list(val)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 原函数值</span>
+</span></span><span style="display:flex;"><span>        f1 <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>f(val)
+</span></span><span style="display:flex;"><span>        val [index] <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>delta
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 自变量改变delta后的函数值</span>
+</span></span><span style="display:flex;"><span>        f2 <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>f(val)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (f2 <span style="color:#f92672">-</span> f1)<span style="color:#f92672">/</span>self<span style="color:#f92672">.</span>delta
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#求二阶导</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_2</span>(self,index1,index2,val):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#! 不改变原值</span>
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">=</span> list(val)
+</span></span><span style="display:flex;"><span>        f1 <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>part_1(index1,val)
+</span></span><span style="display:flex;"><span>        val [index2] <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>delta
+</span></span><span style="display:flex;"><span>        f2 <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>part_1(index1,val)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (f2<span style="color:#f92672">-</span>f1)<span style="color:#f92672">/</span>self<span style="color:#f92672">.</span>delta
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#求梯度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_Gra</span>(self,val):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(list(val)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> :
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>part_1(<span style="color:#ae81ff">0</span>,val)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> len(list(val)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array([self<span style="color:#f92672">.</span>part_1(<span style="color:#ae81ff">0</span>,val),self<span style="color:#f92672">.</span>part_1(<span style="color:#ae81ff">1</span>,val)])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_Hessian</span>(self,val):
+</span></span><span style="display:flex;"><span>        dim <span style="color:#f92672">=</span> len(val)
+</span></span><span style="display:flex;"><span>        mat <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((dim,dim))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(dim):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(dim):
+</span></span><span style="display:flex;"><span>                mat[i,j] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>part_2(i,j,val)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mat
+</span></span></code></pre></div><h3 id="运行程序">运行程序</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 阻尼牛顿法</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 必须在cd 到子文件夹里</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> normal_function <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> 数值最优化.first.Linear_search <span style="color:#66d9ef">as</span> ls
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Newton</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self,f) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>f <span style="color:#f92672">=</span> f
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>func <span style="color:#f92672">=</span> Function(f,<span style="color:#ae81ff">10</span><span style="color:#f92672">**-</span><span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>distance  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_direction</span>(self,val):
+</span></span><span style="display:flex;"><span>        grad <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func<span style="color:#f92672">.</span>cal_Gra(val)
+</span></span><span style="display:flex;"><span>        hessian <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func<span style="color:#f92672">.</span>cal_Hessian(val)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 判断函数是否为正定函数</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>all(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>eigvals(hessian)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0.1</span>) <span style="color:#f92672">==</span> <span style="color:#66d9ef">False</span> :
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 如果不是正定函数</span>
+</span></span><span style="display:flex;"><span>            direction <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>grad 
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;velocity&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 如果是正定函数</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;newton&#34;</span>)
+</span></span><span style="display:flex;"><span>            direction <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span>grad<span style="color:#f92672">.</span>dot(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(hessian))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> direction<span style="color:#f92672">.</span>dot(grad) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.1</span>:
+</span></span><span style="display:flex;"><span>                direction <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>grad 
+</span></span><span style="display:flex;"><span>        print(direction)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> direction
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_distance</span>(self,val):
+</span></span><span style="display:flex;"><span>        distance <span style="color:#f92672">=</span> ls<span style="color:#f92672">.</span>Armijo(val,self<span style="color:#f92672">.</span>cal_direction(val),self<span style="color:#f92672">.</span>f)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> distance
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cal_gra_dis</span>(self,val):
+</span></span><span style="display:flex;"><span>        grad <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func<span style="color:#f92672">.</span>cal_Gra(val)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> math<span style="color:#f92672">.</span>sqrt(grad[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span>grad[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">damped_newton_method</span>(self,val):
+</span></span><span style="display:flex;"><span>        epsilon <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**-</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        iter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#画图</span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>        X,Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x,y)
+</span></span><span style="display:flex;"><span>        Z <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>f([X,Y])
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#等高线</span>
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>contour(X,Y,Z,<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(self<span style="color:#f92672">.</span>cal_gra_dis(val) <span style="color:#f92672">&gt;</span> epsilon):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;第</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">次迭代&#34;</span><span style="color:#f92672">.</span>format(iter))
+</span></span><span style="display:flex;"><span>            direction <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cal_direction(val)
+</span></span><span style="display:flex;"><span>            dis <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cal_distance(val)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;移动距离为</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(dis))
+</span></span><span style="display:flex;"><span>            val_next <span style="color:#f92672">=</span> val <span style="color:#f92672">+</span> dis<span style="color:#f92672">*</span>direction
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 画线段</span>
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">=</span> [val[<span style="color:#ae81ff">0</span>],val_next[<span style="color:#ae81ff">0</span>]]
+</span></span><span style="display:flex;"><span>            y <span style="color:#f92672">=</span> [val[<span style="color:#ae81ff">1</span>],val_next[<span style="color:#ae81ff">1</span>]]
+</span></span><span style="display:flex;"><span>            plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>            val <span style="color:#f92672">=</span> val_next
+</span></span><span style="display:flex;"><span>            iter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">newton_steepest_method</span>(self,val):
+</span></span><span style="display:flex;"><span>        epsilon <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**-</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        iter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#画图</span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>        X,Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x,y)
+</span></span><span style="display:flex;"><span>        Z <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>f([X,Y])
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#等高线</span>
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>contour(X,Y,Z,<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(self<span style="color:#f92672">.</span>cal_gra_dis(val)<span style="color:#f92672">&gt;</span>epsilon):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;第</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">次迭代&#34;</span><span style="color:#f92672">.</span>format(iter))
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;位置坐标</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">,函数值</span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(val,self<span style="color:#f92672">.</span>f(val)))
+</span></span><span style="display:flex;"><span>            direction  <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cal_direction(val)
+</span></span><span style="display:flex;"><span>            print(direction)
+</span></span><span style="display:flex;"><span>            dis <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cal_distance(val)
+</span></span><span style="display:flex;"><span>            val_next <span style="color:#f92672">=</span> val<span style="color:#f92672">+</span> dis<span style="color:#f92672">*</span>direction
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 画线段</span>
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">=</span> [val[<span style="color:#ae81ff">0</span>],val_next[<span style="color:#ae81ff">0</span>]]
+</span></span><span style="display:flex;"><span>            y <span style="color:#f92672">=</span> [val[<span style="color:#ae81ff">1</span>],val_next[<span style="color:#ae81ff">1</span>]]
+</span></span><span style="display:flex;"><span>            plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>            val <span style="color:#f92672">=</span> val_next
+</span></span><span style="display:flex;"><span>            iter <span style="color:#f92672">=</span> iter<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> 
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f1</span>(val):
+</span></span><span style="display:flex;"><span>    x1 <span style="color:#f92672">=</span> val[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    x2 <span style="color:#f92672">=</span> val[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x2<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span>x1 <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x2
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f2</span>(val):
+</span></span><span style="display:flex;"><span>    x1 <span style="color:#f92672">=</span> val[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    x2 <span style="color:#f92672">=</span> val[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x2<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span> (x1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>x2
+</span></span><span style="display:flex;"><span>val1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>val2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>newton <span style="color:#f92672">=</span> Newton(f1)
+</span></span><span style="display:flex;"><span>newton<span style="color:#f92672">.</span>damped_newton_method(val1)
+</span></span><span style="display:flex;"><span>newton2 <span style="color:#f92672">=</span> Newton(f2)
+</span></span><span style="display:flex;"><span>newton2<span style="color:#f92672">.</span>newton_steepest_method(val2)
+</span></span></code></pre></div><h3 id="第一题运算结果">第一题运算结果</h3>
+<pre tabindex="0"><code>第0次迭代
+原位置为(0,0),函数值为0
+现位置为(0.4999997499301111,0.9999997505263557),函数值为-5.999998500772843
+移动距离为0.5
+第1次迭代
+原位置为(0.4999997499301111,0.9999997505263557),函数值为-5.999998500772843
+现位置为(0.7500329153753698,1.4997332724970613),函数值为-7.499799027770552
+移动距离为0.5
+第2次迭代
+原位置为(0.7500329153753698,1.4997332724970613),函数值为-7.499799027770552
+现位置为(0.8750745126439385,1.7498996759594363),函数值为-7.875024318350207
+移动距离为0.5
+第3次迭代
+原位置为(0.8750745126439385,1.7498996759594363),函数值为-7.875024318350207
+现位置为(0.9375383881296718,1.8749384719185838),函数值为-7.9687538023641835
+移动距离为0.5
+第4次迭代
+原位置为(0.9375383881296718,1.8749384719185838),函数值为-7.9687538023641835
+现位置为(0.9687904703615839,1.9375189711031524),函数值为-7.992199982066987
+移动距离为0.5
+第5次迭代
+原位置为(0.9687904703615839,1.9375189711031524),函数值为-7.992199982066987
+现位置为(0.9843987992633514,1.9687633893220253),函数值为-7.998050684295652
+移动距离为0.5
+第6次迭代
+原位置为(0.9843987992633514,1.9687633893220253),函数值为-7.998050684295652
+现位置为(0.9922001918050374,1.9843974048298216),函数值为-7.999513210992443
+移动距离为0.5
+第7次迭代
+原位置为(0.9922001918050374,1.9843974048298216),函数值为-7.999513210992443
+现位置为(0.9960994992539717,1.9921977589594841),函数值为-7.999878269410467
+移动距离为0.5
+第8次迭代
+原位置为(0.9960994992539717,1.9921977589594841),函数值为-7.999878269410467
+现位置为(0.9980497592473094,1.9960982827161449),函数值为-7.999969562846263
+移动距离为0.5
+第9次迭代
+原位置为(0.9980497592473094,1.9960982827161449),函数值为-7.999969562846263
+现位置为(0.999024759413865,1.9980478524010095),函数值为-7.999992384742948
+移动距离为0.5
+第10次迭代
+原位置为(0.999024759413865,1.9980478524010095),函数值为-7.999992384742948
+现位置为(0.9995121945682066,1.9990231564400684),函数值为-7.9999980939601025
+移动距离为0.5
+第11次迭代
+原位置为(0.9995121945682066,1.9990231564400684),函数值为-7.9999980939601025
+现位置为(0.9997558256183843,1.9995112847704415),函数值为-7.99999952267291
+移动距离为0.5
+第12次迭代
+原位置为(0.9997558256183843,1.9995112847704415),函数值为-7.99999952267291
+现位置为(0.9998776789939117,1.999755370694065),函数值为-7.999999880306789
+移动距离为0.5
+第13次迭代
+原位置为(0.9998776789939117,1.999755370694065),函数值为-7.999999880306789
+现位置为(0.9999995432134957,1.9999995322678747),函数值为-7.999999999998947
+移动距离为1
+</code></pre><h3 id="第一题图像展示">第一题图像展示</h3>
+<p><img src="Figure_1.png" alt=""></p>
+<h3 id="第二题运算结果">第二题运算结果</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>第0次迭代
+</span></span><span style="display:flex;"><span>位置坐标[<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">0</span>],函数值16
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">16.000004</span>   <span style="color:#ae81ff">3.999999</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>),函数值为16
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.9631997406320352</span>,<span style="color:#ae81ff">0.2591999353455776</span>),函数值为3<span style="color:#ae81ff">.537725858381355</span>
+</span></span><span style="display:flex;"><span>第1次迭代
+</span></span><span style="display:flex;"><span>位置坐标[<span style="color:#ae81ff">0.96319974</span> <span style="color:#ae81ff">0.25919994</span>],函数值3<span style="color:#ae81ff">.537725858381355</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">1.21083555</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.96197777</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.9631997406320352</span>,<span style="color:#ae81ff">0.2591999353455776</span>),函数值为3<span style="color:#ae81ff">.537725858381355</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.3577819651609495</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.22178894792709458</span>),函数值为0<span style="color:#ae81ff">.5896128209403502</span>
+</span></span><span style="display:flex;"><span>第2次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.35778197</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.22178895</span>],函数值0<span style="color:#ae81ff">.5896128209403502</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.34399788</span>  <span style="color:#ae81ff">0.16271508</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.3577819651609495</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.22178894792709458</span>),函数值为0<span style="color:#ae81ff">.5896128209403502</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.18578302330112775</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.14043140980811325</span>),函数值为0<span style="color:#ae81ff">.16262934454553668</span>
+</span></span><span style="display:flex;"><span>第3次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.18578302</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.14043141</span>],函数值0<span style="color:#ae81ff">.16262934454553668</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.18021075</span>  <span style="color:#ae81ff">0.12420892</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.18578302330112775</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.14043140980811325</span>),函数值为0<span style="color:#ae81ff">.16262934454553668</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.09567764794646973</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.07832695050213126</span>),函数值为0<span style="color:#ae81ff">.043468981976243604</span>
+</span></span><span style="display:flex;"><span>第4次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.09567765</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.07832695</span>],函数值0<span style="color:#ae81ff">.043468981976243604</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.09394401</span>  <span style="color:#ae81ff">0.07391512</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.09567764794646973</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.07832695050213126</span>),函数值为0<span style="color:#ae81ff">.043468981976243604</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.04870564431488999</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0413693896694938</span>),函数值为0<span style="color:#ae81ff">.01129852366632529</span>
+</span></span><span style="display:flex;"><span>第5次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.04870564</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.04136939</span>],函数值0<span style="color:#ae81ff">.01129852366632529</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.04822158</span>  <span style="color:#ae81ff">0.04020631</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.04870564431488999</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0413693896694938</span>),函数值为0<span style="color:#ae81ff">.01129852366632529</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.024594856739063642</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.02126623642391571</span>),函数值为0<span style="color:#ae81ff">.0028847448185070805</span>
+</span></span><span style="display:flex;"><span>第6次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.02459486</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.02126624</span>],函数值0<span style="color:#ae81ff">.0028847448185070805</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.02446712</span>  <span style="color:#ae81ff">0.02096642</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.024594856739063642</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.02126623642391571</span>),函数值为0<span style="color:#ae81ff">.0028847448185070805</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.012361296837459608</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.010783025482727924</span>),函数值为0<span style="color:#ae81ff">.0007291279407645477</span>
+</span></span><span style="display:flex;"><span>第7次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.0123613</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">0.01078303</span>],函数值0<span style="color:#ae81ff">.0007291279407645477</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0123288</span>   <span style="color:#ae81ff">0.01070652</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.012361296837459608</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.010783025482727924</span>),函数值为0<span style="color:#ae81ff">.0007291279407645477</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.006196897830639985</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.005429765429797123</span>),函数值为0<span style="color:#ae81ff">.00018329703488531246</span>
+</span></span><span style="display:flex;"><span>第8次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.0061969</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00542977</span>],函数值0<span style="color:#ae81ff">.00018329703488531246</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00618903</span>  <span style="color:#ae81ff">0.00541011</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.006196897830639985</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.005429765429797123</span>),函数值为0<span style="color:#ae81ff">.00018329703488531246</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.003102384293917133</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.002724710318136713</span>),函数值为4<span style="color:#ae81ff">.594942430634586e-05</span>
+</span></span><span style="display:flex;"><span>第9次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.00310238</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00272471</span>],函数值4<span style="color:#ae81ff">.594942430634586e-05</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00310078</span>  <span style="color:#ae81ff">0.0027194</span> ]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.003102384293917133</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.002724710318136713</span>),函数值为4<span style="color:#ae81ff">.594942430634586e-05</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.0015519961786471003</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0013650096417566712</span>),函数值为1<span style="color:#ae81ff">.1501307764222609e-05</span>
+</span></span><span style="display:flex;"><span>第10次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.001552</span>   <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00136501</span>],函数值1<span style="color:#ae81ff">.1501307764222609e-05</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00155197</span>  <span style="color:#ae81ff">0.0013633</span> ]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.0015519961786471003</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0013650096417566712</span>),函数值为1<span style="color:#ae81ff">.1501307764222609e-05</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.0007760125645807452</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0006833573590382932</span>),函数值为2<span style="color:#ae81ff">.876170796427301e-06</span>
+</span></span><span style="display:flex;"><span>第11次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.00077601</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00068336</span>],函数值2<span style="color:#ae81ff">.876170796427301e-06</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00077638</span>  <span style="color:#ae81ff">0.00068256</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.0007760125645807452</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0006833573590382932</span>),函数值为2<span style="color:#ae81ff">.876170796427301e-06</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.00038782252261232794</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0003420795651061589</span>),函数值为7<span style="color:#ae81ff">.186951159695648e-07</span>
+</span></span><span style="display:flex;"><span>第12次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.00038782</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00034208</span>],函数值7<span style="color:#ae81ff">.186951159695648e-07</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00038829</span>  <span style="color:#ae81ff">0.0003415</span> ]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.00038782252261232794</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0003420795651061589</span>),函数值为7<span style="color:#ae81ff">.186951159695648e-07</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">0.00019367783660174983</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0001713275717341014</span>),函数值为1<span style="color:#ae81ff">.794039810856684e-07</span>
+</span></span><span style="display:flex;"><span>第13次迭代
+</span></span><span style="display:flex;"><span>位置坐标[ <span style="color:#ae81ff">0.00019368</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.00017133</span>],函数值1<span style="color:#ae81ff">.794039810856684e-07</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00019417</span>  <span style="color:#ae81ff">0.00017081</span>]
+</span></span><span style="display:flex;"><span>原位置为(<span style="color:#ae81ff">0.00019367783660174983</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.0001713275717341014</span>),函数值为1<span style="color:#ae81ff">.794039810856684e-07</span>
+</span></span><span style="display:flex;"><span>现位置为(<span style="color:#ae81ff">9.65930640295443e-05</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">8.592325980293392e-05</span>),函数值为4<span style="color:#ae81ff">.4704488332543737e-08</span>
+</span></span></code></pre></div><h3 id="第二题图像">第二题图像</h3>
+<p><img src="Figure_2.png" alt=""></p>
+
+      </article>
+    </section>
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+              
+              <p>© 2016 - 2022 ChenK&#39;s Blog</p>
+              
+
+              <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <header class="ui basic very padded segment dream-header">
+  
+  <div class="ui small circular image">
+    <img src="/img/avatar.jpeg" alt="avatar" />
+  </div>
+  
+
+  <div class="content">
+    <h1 class="ui medium header">Hugo Theme Dream<span class="sub header">Motto</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+
+  
+  <a class="item" href="mailto:kangchen0623@gmail.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js" integrity="sha256-CgSoWC9w5wNmI1aN8dIMK+6DPelUEtvDr+Bc2m/0Nx8=" crossorigin="anonymous"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "#f7f7f7"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js" integrity="sha256-tBd38uWlvgfps3zHPrUb2ePBg+Z8EjMf0QloFONzpvU=" crossorigin="anonymous"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1/dist/html2canvas.min.js" integrity="sha256-uacRffSSMP9qpvNWhVmYLykBv9YKMA1d/VSIN1AmfyQ=" crossorigin="anonymous"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+
+    
+  </body>
+</html>

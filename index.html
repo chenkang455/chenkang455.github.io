@@ -10,7 +10,7 @@
 
 
 
-<meta name="author" content="" />
+<meta name="author" content="Chenk" />
 <meta name="description" content="" />
 
 
@@ -45,9 +45,21 @@
   }
 
   
+  a:not(.item, .ui.button) {
+    color: seagreen !important;
+  }
+  
 
   
 
+  
+  body.default {
+    
+    background-color: #f7f7f7;
+    
+
+    
+  }
   
 
   
@@ -81,9 +93,13 @@
 
 <header class="ui basic very padded segment dream-header">
   
+  <div class="ui small circular image">
+    <img src="/img/avatar.jpeg" alt="avatar" />
+  </div>
+  
 
   <div class="content">
-    <h1 class="ui medium header">Set headerTitle in the config to display<span class="sub header"></span>
+    <h1 class="ui medium header">Hugo Theme Dream<span class="sub header">Motto</span>
     </h1>
 
     <article class="ui horizontal list">
@@ -116,7 +132,66 @@
   <div class="content no-cover">
   
     <h2 class="ui medium header">
-      <a href="/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87%E6%B5%8B%E8%AF%95/">第一篇博文测试</a>
+      <a href="/posts/first/chapter2/">最优化作业1</a>
+    </h2>
+    <div class="meta">
+      <p class="date">
+        星期六，三月 5 日，2022 年
+      </p>
+    </div>
+    <div class="description">
+      第一次作业 黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。 import matplotlib.pyplot as plt import numpy as np # define the function def f(x):  return 1-x*pow(2.718, -x*x) # parameters define left = 0 right = 1 gold_parameter = 0.618 # make graph x_numbers = np.linspace(left, right, 1000) y_numbers = [f(x) for x in x_numbers] plt.plot(x_numbers, y_numbers) iter = 0 # iteration  while right - left &gt; 0.01:  length = right - left  x1 = left + (1-gold_parameter)*length  x2 = left + gold_parameter*length  x = [x1, x2]  y = [f(x1), f(x2)]  plt.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Chenk</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>2 分钟阅读</div>
+  </div>
+</article>
+
+  </div>
+  
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+    <article class="ui attached segment card dream-card">
+  
+
+  
+  <div class="content no-cover">
+  
+    <h2 class="ui medium header">
+      <a href="/posts/second/second/">最优化作业2</a>
+    </h2>
+    <div class="meta">
+      <p class="date">
+        星期六，三月 5 日，2022 年
+      </p>
+    </div>
+    <div class="description">
+      第二次作业 阻尼牛顿法 由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能
+扩充函数类 import numpy as np class Function:  def __init__(self,f,delta) -&gt; None:  self.delta = delta  self.f = f  def cal_val(self,val):  return self.f(val)  #求偏导  def part_1(self,index,val):  #! 不改变原值  val = list(val)  # 原函数值  f1 = self.f(val)  val [index] += self.delta  # 自变量改变delta后的函数值  f2 = self.f(val)  return (f2 - f1)/self.delta  #求二阶导  def part_2(self,index1,index2,val):  #!
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Chenk</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>3 分钟阅读</div>
+  </div>
+</article>
+
+  </div>
+  
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+    <article class="ui attached segment card dream-card">
+  
+
+  
+  <div class="content no-cover">
+  
+    <h2 class="ui medium header">
+      <a href="/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87%E6%B5%8B%E8%AF%95/">测试</a>
     </h2>
     <div class="meta">
       <p class="date">
@@ -129,7 +204,7 @@
   </div>
 
   <div class="extra content">
-    <div class="author">@&nbsp;</div>
+    <div class="author">@&nbsp;Chenk</div>
     <div class="reading-time">
       <i class="clock icon"></i>0 分钟阅读</div>
   </div>
@@ -149,7 +224,7 @@
 
             <footer class="ui basic center aligned segment" style="background-color: transparent;">
               
-              <p>© 2022 ChenK&#39;s Blog</p>
+              <p>© 2016 - 2022 ChenK&#39;s Blog</p>
               
 
               <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -162,9 +237,13 @@
           <div class="dream-max-width">
             <header class="ui basic very padded segment dream-header">
   
+  <div class="ui small circular image">
+    <img src="/img/avatar.jpeg" alt="avatar" />
+  </div>
+  
 
   <div class="content">
-    <h1 class="ui medium header">Set headerTitle in the config to display<span class="sub header"></span>
+    <h1 class="ui medium header">Hugo Theme Dream<span class="sub header">Motto</span>
     </h1>
 
     <article class="ui horizontal list">
@@ -197,6 +276,10 @@
       <nav class="ui secondary menu dream-menu dream-socials">
   
 
+  
+  <a class="item" href="mailto:kangchen0623@gmail.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
   
 
   
@@ -241,7 +324,7 @@
     
 
     <script>
-  window.background =  null 
+  window.background = "#f7f7f7"
   window.defaultDark =  null 
   window.backgroundDark =  null 
   window.backgroundImageDark =  null 
