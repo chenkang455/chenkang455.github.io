@@ -1,39 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>ChenK&#39;s Blog</title>
-    <link>https://chenkang455.github.io/</link>
-    <description>Recent content on ChenK&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-Hans</language>
-    <lastBuildDate>Sat, 05 Mar 2022 19:09:40 +0800</lastBuildDate><atom:link href="https://chenkang455.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>最优化作业1</title>
-      <link>https://chenkang455.github.io/posts/first/chapter2/</link>
-      <pubDate>Sat, 05 Mar 2022 19:09:40 +0800</pubDate>
-      
-      <guid>https://chenkang455.github.io/posts/first/chapter2/</guid>
-      <description>第一次作业 黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。 import matplotlib.pyplot as plt import numpy as np # define the function def f(x):  return 1-x*pow(2.718, -x*x) # parameters define left = 0 right = 1 gold_parameter = 0.618 # make graph x_numbers = np.linspace(left, right, 1000) y_numbers = [f(x) for x in x_numbers] plt.plot(x_numbers, y_numbers) iter = 0 # iteration  while right - left &amp;gt; 0.01:  length = right - left  x1 = left + (1-gold_parameter)*length  x2 = left + gold_parameter*length  x = [x1, x2]  y = [f(x1), f(x2)]  plt.</description>
-    </item>
-    
-    <item>
-      <title>最优化作业2</title>
-      <link>https://chenkang455.github.io/posts/second/second/</link>
-      <pubDate>Sat, 05 Mar 2022 19:09:40 +0800</pubDate>
-      
-      <guid>https://chenkang455.github.io/posts/second/second/</guid>
-      <description>第二次作业 阻尼牛顿法 由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能
-扩充函数类 import numpy as np class Function:  def __init__(self,f,delta) -&amp;gt; None:  self.delta = delta  self.f = f  def cal_val(self,val):  return self.f(val)  #求偏导  def part_1(self,index,val):  #! 不改变原值  val = list(val)  # 原函数值  f1 = self.f(val)  val [index] += self.delta  # 自变量改变delta后的函数值  f2 = self.f(val)  return (f2 - f1)/self.delta  #求二阶导  def part_2(self,index1,index2,val):  #!</description>
-    </item>
-    
-    <item>
-      <title>测试</title>
-      <link>https://chenkang455.github.io/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87%E6%B5%8B%E8%AF%95/</link>
-      <pubDate>Sat, 05 Mar 2022 19:09:40 +0800</pubDate>
-      
-      <guid>https://chenkang455.github.io/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87%E6%B5%8B%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Example Site</title>
+        <link>https://chenkang455.github.io/</link>
+        <description>Recent content on Example Site</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 05 Mar 2022 20:59:36 +0800</lastBuildDate><atom:link href="https://chenkang455.github.io/index.xml" rel="self" type="application/rss+xml" />
+    </channel>
 </rss>
