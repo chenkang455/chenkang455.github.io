@@ -14,16 +14,16 @@
                 href="https://chenkang455.github.io/cn/categories/"
                 />
   </url><url>
-    <loc>https://chenkang455.github.io/cn/posts/</loc>
+    <loc>https://chenkang455.github.io/cn/page/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://chenkang455.github.io/posts/"
+                href="https://chenkang455.github.io/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://chenkang455.github.io/cn/posts/"
+                href="https://chenkang455.github.io/cn/page/"
                 />
   </url><url>
     <loc>https://chenkang455.github.io/cn/tags/</loc>
@@ -38,16 +38,16 @@
                 href="https://chenkang455.github.io/cn/tags/"
                 />
   </url><url>
-    <loc>https://chenkang455.github.io/cn/posts/page/about/</loc>
+    <loc>https://chenkang455.github.io/cn/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://chenkang455.github.io/posts/page/about/"
+                href="https://chenkang455.github.io/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://chenkang455.github.io/cn/posts/page/about/"
+                href="https://chenkang455.github.io/cn/%E5%85%B3%E4%BA%8E/"
                 />
   </url><url>
     <loc>https://chenkang455.github.io/cn/</loc>

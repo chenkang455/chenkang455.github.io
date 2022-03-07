@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='第一次作业 黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30  import matplotlib.pyplot as plt import numpy as np # define the function def f(x): return 1-x*pow(2.718, -x*x) # parameters define left = 0 right = 1 gold_parameter = 0.618 # make graph x_numbers = np.'><title>最优化作业</title>
+
+<link rel='canonical' href='https://chenkang455.github.io/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='最优化作业'>
+<meta property='og:description' content='第一次作业 黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30  import matplotlib.pyplot as plt import numpy as np # define the function def f(x): return 1-x*pow(2.718, -x*x) # parameters define left = 0 right = 1 gold_parameter = 0.618 # make graph x_numbers = np.'>
+<meta property='og:url' content='https://chenkang455.github.io/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/'>
+<meta property='og:site_name' content='Chenk'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='最优化' /><meta property='article:published_time' content='2022-03-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://chenkang455.github.io/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
+<meta name="twitter:title" content="最优化作业">
+<meta name="twitter:description" content="第一次作业 黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30  import matplotlib.pyplot as plt import numpy as np # define the function def f(x): return 1-x*pow(2.718, -x*x) # parameters define left = 0 right = 1 gold_parameter = 0.618 # make graph x_numbers = np."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://chenkang455.github.io/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/ICEY_hu31dca7e6e1f7fb0592c9ca3d0e960e75_9984_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Chenk</a></h1>
+            <h2 class="site-description">欢迎来到Chenk分享学习与生活的博客世界~</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://chenkang455.github.io/" selected>English</option>
+                        
+                            <option value="https://chenkang455.github.io/cn/" >中文</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/">
+                <img src="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/the-creative-exchange-d2zvqp3fpro-unsplash_huf941de4769045cdfa8c9ee7036519a2a_35369_800x0_resize_q75_box.jpg"
+                        srcset="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/the-creative-exchange-d2zvqp3fpro-unsplash_huf941de4769045cdfa8c9ee7036519a2a_35369_800x0_resize_q75_box.jpg 800w, /p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/the-creative-exchange-d2zvqp3fpro-unsplash_huf941de4769045cdfa8c9ee7036519a2a_35369_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="566" 
+                        loading="lazy"
+                        alt="Featured image of post 最优化作业" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%B0%E5%AD%A6/" style="background-color: #2a9d8f; color: #fff;">
+                数学
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/">最优化作业</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="第一次作业">第一次作业</h2>
+<h3 id="黄金分割法求函数-phix1-alpha-e-alpha-2的极小值区间为01epsilon--001">黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># define the function</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mf">2.718</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># parameters define</span>
+<span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">right</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">gold_parameter</span> <span class="o">=</span> <span class="mf">0.618</span>
+<span class="c1"># make graph</span>
+<span class="n">x_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_numbers</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_numbers</span><span class="p">,</span> <span class="n">y_numbers</span><span class="p">)</span>
+<span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># iteration </span>
+<span class="k">while</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">gold_parameter</span><span class="p">)</span><span class="o">*</span><span class="n">length</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">gold_parameter</span><span class="o">*</span><span class="n">length</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">x2</span><span class="p">)]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># judge</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">x2</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">x1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">x2</span>
+    <span class="nb">iter</span> <span class="o">=</span> <span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;共迭代</span><span class="si">{0}</span><span class="s2">次，最终结果是</span><span class="si">{1}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="运行结果">运行结果</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">共迭代10次</span><span class="err">，</span><span class="n">最终结果是0</span><span class="mf">.5710968311798179</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="函数图像">函数图像</h4>
+<p><img src="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_1.png"
+	width="640"
+	height="480"
+	srcset="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_1_hu365bc6c5134859b0a5089e5755139d73_17973_480x0_resize_box_2.png 480w, /p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_1_hu365bc6c5134859b0a5089e5755139d73_17973_1024x0_resize_box_2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+<hr>
+<h3 id="使用armijio搜索算法计算第k次的搜索步长alpha_k目标函数100x_2-x_1221-x_12">使用Armijio搜索算法计算第k次的搜索步长$\alpha_k$,目标函数$100(x_2-x_1^2)^2+(1-x_1)^2$</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># calculate the result</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">x1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="c1"># 3d-plot</span>
+<span class="k">def</span> <span class="nf">plot_function</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">x1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># calculate the gradient</span>
+
+<span class="k">def</span> <span class="nf">cal_gra</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.0001</span>
+    <span class="n">dx1</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">([</span><span class="n">x1</span><span class="o">+</span><span class="n">delta</span><span class="p">,</span> <span class="n">x2</span><span class="p">])</span><span class="o">-</span><span class="n">f</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]))</span> <span class="o">/</span> <span class="n">delta</span>
+    <span class="n">dx2</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="o">+</span><span class="n">delta</span><span class="p">])</span><span class="o">-</span><span class="n">f</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]))</span><span class="o">/</span><span class="n">delta</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dx1</span><span class="p">,</span> <span class="n">dx2</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">Armijo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">direction</span><span class="p">):</span>
+    <span class="c1"># define parameters</span>
+    <span class="n">rou</span> <span class="o">=</span> <span class="mf">0.6</span>  
+    <span class="n">dis</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># define the moving distance</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># define the constant moving distance</span>
+    <span class="nb">iter</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># define iter times</span>
+    <span class="n">iter_max</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;原位置为(</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">),函数值为</span><span class="si">{2}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">*</span> <span class="n">dis</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">rou</span> <span class="o">*</span> <span class="n">dis</span> <span class="o">*</span> <span class="n">cal_gra</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="n">beta</span> 
+        <span class="k">while</span> <span class="nb">iter</span> <span class="o">&lt;</span> <span class="n">iter_max</span><span class="p">:</span>
+            
+            <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">*</span> <span class="n">dis</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">rou</span> <span class="o">*</span> <span class="n">dis</span> <span class="o">*</span> <span class="n">cal_gra</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span> <span class="n">direction</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;梯度为(</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cal_gra</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="n">cal_gra</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="k">break</span>
+            <span class="n">dis</span> <span class="o">=</span> <span class="n">dis</span> <span class="o">*</span> <span class="n">rou</span>   <span class="c1">#! update formula</span>
+            <span class="nb">iter</span> <span class="o">=</span> <span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dis</span> <span class="o">*</span> <span class="n">direction</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;现位置为(</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">),函数值为</span><span class="si">{2}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">dis</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># position</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;搜索步长为</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Armijo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">direction</span><span class="p">)))</span>
+    <span class="n">plot_function</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="运行结果-1">运行结果</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">原位置为</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">函数值为400</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">函数值为100</span>
+<span class="n">搜索步长为1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="函数图像-1">函数图像</h4>
+<p><img src="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_2.png"
+	width="640"
+	height="480"
+	srcset="/p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_2_hub2f13a12fbc9c743edd00fdd1f8d6936_91596_480x0_resize_box_2.png 480w, /p/%E6%9C%80%E4%BC%98%E5%8C%96%E4%BD%9C%E4%B8%9A/first_2_hub2f13a12fbc9c743edd00fdd1f8d6936_91596_1024x0_resize_box_2.png 1024w"
+	loading="lazy"
+	
+		alt="alt"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+<h2 id="第二次作业">第二次作业</h2>
+<h3 id="阻尼牛顿法">阻尼牛顿法</h3>
+<p>由于运算过程中需要计算函数梯度以及黑塞矩阵，设计一个类来扩充原函数的功能</p>
+<h4 id="扩充函数类">扩充函数类</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">class</span> <span class="nc">Function</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">delta</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="k">def</span> <span class="nf">cal_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="c1">#求偏导</span>
+    <span class="k">def</span> <span class="nf">part_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="c1">#! 不改变原值</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="c1"># 原函数值</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">val</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span>
+        <span class="c1"># 自变量改变delta后的函数值</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">f2</span> <span class="o">-</span> <span class="n">f1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span>
+    <span class="c1">#求二阶导</span>
+    <span class="k">def</span> <span class="nf">part_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index1</span><span class="p">,</span><span class="n">index2</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="c1">#! 不改变原值</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_1</span><span class="p">(</span><span class="n">index1</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">val</span> <span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_1</span><span class="p">(</span><span class="n">index1</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">f2</span><span class="o">-</span><span class="n">f1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span>
+    <span class="c1">#求梯度</span>
+    <span class="k">def</span> <span class="nf">cal_Gra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">part_1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">val</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">part_1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">val</span><span class="p">)])</span>
+    <span class="k">def</span> <span class="nf">cal_Hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mat</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="运行程序">运行程序</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 阻尼牛顿法</span>
+<span class="c1"># 必须在cd 到子文件夹里</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;..&#34;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">normal_function</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">数值最优化.first.Linear_search</span> <span class="k">as</span> <span class="nn">ls</span>
+<span class="k">class</span> <span class="nc">Newton</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distance</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">cal_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">cal_Gra</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">hessian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">cal_Hessian</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="c1"># 判断函数是否为正定函数</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">hessian</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="p">:</span>
+            <span class="c1"># 如果不是正定函数</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="n">grad</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;velocity&#34;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 如果是正定函数</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;newton&#34;</span><span class="p">)</span>
+            <span class="n">direction</span> <span class="o">=</span>  <span class="o">-</span><span class="n">grad</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">hessian</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="n">grad</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">direction</span>
+    <span class="k">def</span> <span class="nf">cal_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">Armijo</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">cal_direction</span><span class="p">(</span><span class="n">val</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">distance</span>
+    <span class="k">def</span> <span class="nf">cal_gra_dis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">cal_Gra</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">damped_newton_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">3</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">#画图</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">])</span>
+        <span class="c1">#等高线</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cal_gra_dis</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;第</span><span class="si">{0}</span><span class="s2">次迭代&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">))</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_direction</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">dis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_distance</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;移动距离为</span><span class="si">{0}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dis</span><span class="p">))</span>
+            <span class="n">val_next</span> <span class="o">=</span> <span class="n">val</span> <span class="o">+</span> <span class="n">dis</span><span class="o">*</span><span class="n">direction</span>
+            <span class="c1"># 画线段</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">val_next</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">val_next</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val_next</span>
+            <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">newton_steepest_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">3</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">#画图</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">])</span>
+        <span class="c1">#等高线</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cal_gra_dis</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsilon</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;第</span><span class="si">{0}</span><span class="s2">次迭代&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;位置坐标</span><span class="si">{0}</span><span class="s2">,函数值</span><span class="si">{1}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">val</span><span class="p">)))</span>
+            <span class="n">direction</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_direction</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+            <span class="n">dis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_distance</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">val_next</span> <span class="o">=</span> <span class="n">val</span><span class="o">+</span> <span class="n">dis</span><span class="o">*</span><span class="n">direction</span>
+            <span class="c1"># 画线段</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">val_next</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">val_next</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val_next</span>
+            <span class="nb">iter</span> <span class="o">=</span> <span class="nb">iter</span><span class="o">+</span><span class="mi">1</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span><span class="mi">8</span><span class="o">*</span><span class="n">x1</span> <span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">x2</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span> <span class="p">(</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x2</span>
+<span class="n">val1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">val2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">newton</span> <span class="o">=</span> <span class="n">Newton</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+<span class="n">newton</span><span class="o">.</span><span class="n">damped_newton_method</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+<span class="n">newton2</span> <span class="o">=</span> <span class="n">Newton</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
+<span class="n">newton2</span><span class="o">.</span><span class="n">newton_steepest_method</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="第一题运算结果">第一题运算结果</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">第0次迭代
+原位置为(0,0),函数值为0
+现位置为(0.4999997499301111,0.9999997505263557),函数值为-5.999998500772843
+移动距离为0.5
+第1次迭代
+原位置为(0.4999997499301111,0.9999997505263557),函数值为-5.999998500772843
+现位置为(0.7500329153753698,1.4997332724970613),函数值为-7.499799027770552
+移动距离为0.5
+第2次迭代
+原位置为(0.7500329153753698,1.4997332724970613),函数值为-7.499799027770552
+现位置为(0.8750745126439385,1.7498996759594363),函数值为-7.875024318350207
+移动距离为0.5
+第3次迭代
+原位置为(0.8750745126439385,1.7498996759594363),函数值为-7.875024318350207
+现位置为(0.9375383881296718,1.8749384719185838),函数值为-7.9687538023641835
+移动距离为0.5
+第4次迭代
+原位置为(0.9375383881296718,1.8749384719185838),函数值为-7.9687538023641835
+现位置为(0.9687904703615839,1.9375189711031524),函数值为-7.992199982066987
+移动距离为0.5
+第5次迭代
+原位置为(0.9687904703615839,1.9375189711031524),函数值为-7.992199982066987
+现位置为(0.9843987992633514,1.9687633893220253),函数值为-7.998050684295652
+移动距离为0.5
+第6次迭代
+原位置为(0.9843987992633514,1.9687633893220253),函数值为-7.998050684295652
+现位置为(0.9922001918050374,1.9843974048298216),函数值为-7.999513210992443
+移动距离为0.5
+第7次迭代
+原位置为(0.9922001918050374,1.9843974048298216),函数值为-7.999513210992443
+现位置为(0.9960994992539717,1.9921977589594841),函数值为-7.999878269410467
+移动距离为0.5
+第8次迭代
+原位置为(0.9960994992539717,1.9921977589594841),函数值为-7.999878269410467
+现位置为(0.9980497592473094,1.9960982827161449),函数值为-7.999969562846263
+移动距离为0.5
+第9次迭代
+原位置为(0.9980497592473094,1.9960982827161449),函数值为-7.999969562846263
+现位置为(0.999024759413865,1.9980478524010095),函数值为-7.999992384742948
+移动距离为0.5
+第10次迭代
+原位置为(0.999024759413865,1.9980478524010095),函数值为-7.999992384742948
+现位置为(0.9995121945682066,1.9990231564400684),函数值为-7.9999980939601025
+移动距离为0.5
+第11次迭代
+原位置为(0.9995121945682066,1.9990231564400684),函数值为-7.9999980939601025
+现位置为(0.9997558256183843,1.9995112847704415),函数值为-7.99999952267291
+移动距离为0.5
+第12次迭代
+原位置为(0.9997558256183843,1.9995112847704415),函数值为-7.99999952267291
+现位置为(0.9998776789939117,1.999755370694065),函数值为-7.999999880306789
+移动距离为0.5
+第13次迭代
+原位置为(0.9998776789939117,1.999755370694065),函数值为-7.999999880306789
+现位置为(0.9999995432134957,1.9999995322678747),函数值为-7.999999999998947
+移动距离为1
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="第一题图像展示">第一题图像展示</h4>
+<p><img src="/img/math/optimization/second_1.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h4 id="第二题运算结果">第二题运算结果</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">第0次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">],</span><span class="n">函数值16</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">16.000004</span>   <span class="mf">3.999999</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">函数值为16</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.9631997406320352</span><span class="p">,</span><span class="mf">0.2591999353455776</span><span class="p">),</span><span class="n">函数值为3</span><span class="mf">.537725858381355</span>
+<span class="n">第1次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span><span class="mf">0.96319974</span> <span class="mf">0.25919994</span><span class="p">],</span><span class="n">函数值3</span><span class="mf">.537725858381355</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">1.21083555</span> <span class="o">-</span><span class="mf">0.96197777</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.9631997406320352</span><span class="p">,</span><span class="mf">0.2591999353455776</span><span class="p">),</span><span class="n">函数值为3</span><span class="mf">.537725858381355</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.3577819651609495</span><span class="p">,</span><span class="o">-</span><span class="mf">0.22178894792709458</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.5896128209403502</span>
+<span class="n">第2次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.35778197</span> <span class="o">-</span><span class="mf">0.22178895</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.5896128209403502</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.34399788</span>  <span class="mf">0.16271508</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.3577819651609495</span><span class="p">,</span><span class="o">-</span><span class="mf">0.22178894792709458</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.5896128209403502</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.18578302330112775</span><span class="p">,</span><span class="o">-</span><span class="mf">0.14043140980811325</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.16262934454553668</span>
+<span class="n">第3次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.18578302</span> <span class="o">-</span><span class="mf">0.14043141</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.16262934454553668</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.18021075</span>  <span class="mf">0.12420892</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.18578302330112775</span><span class="p">,</span><span class="o">-</span><span class="mf">0.14043140980811325</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.16262934454553668</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.09567764794646973</span><span class="p">,</span><span class="o">-</span><span class="mf">0.07832695050213126</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.043468981976243604</span>
+<span class="n">第4次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.09567765</span> <span class="o">-</span><span class="mf">0.07832695</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.043468981976243604</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.09394401</span>  <span class="mf">0.07391512</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.09567764794646973</span><span class="p">,</span><span class="o">-</span><span class="mf">0.07832695050213126</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.043468981976243604</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.04870564431488999</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0413693896694938</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.01129852366632529</span>
+<span class="n">第5次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.04870564</span> <span class="o">-</span><span class="mf">0.04136939</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.01129852366632529</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.04822158</span>  <span class="mf">0.04020631</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.04870564431488999</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0413693896694938</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.01129852366632529</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.024594856739063642</span><span class="p">,</span><span class="o">-</span><span class="mf">0.02126623642391571</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.0028847448185070805</span>
+<span class="n">第6次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.02459486</span> <span class="o">-</span><span class="mf">0.02126624</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.0028847448185070805</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.02446712</span>  <span class="mf">0.02096642</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.024594856739063642</span><span class="p">,</span><span class="o">-</span><span class="mf">0.02126623642391571</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.0028847448185070805</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.012361296837459608</span><span class="p">,</span><span class="o">-</span><span class="mf">0.010783025482727924</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.0007291279407645477</span>
+<span class="n">第7次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.0123613</span>  <span class="o">-</span><span class="mf">0.01078303</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.0007291279407645477</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.0123288</span>   <span class="mf">0.01070652</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.012361296837459608</span><span class="p">,</span><span class="o">-</span><span class="mf">0.010783025482727924</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.0007291279407645477</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.006196897830639985</span><span class="p">,</span><span class="o">-</span><span class="mf">0.005429765429797123</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.00018329703488531246</span>
+<span class="n">第8次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.0061969</span>  <span class="o">-</span><span class="mf">0.00542977</span><span class="p">],</span><span class="n">函数值0</span><span class="mf">.00018329703488531246</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00618903</span>  <span class="mf">0.00541011</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.006196897830639985</span><span class="p">,</span><span class="o">-</span><span class="mf">0.005429765429797123</span><span class="p">),</span><span class="n">函数值为0</span><span class="mf">.00018329703488531246</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.003102384293917133</span><span class="p">,</span><span class="o">-</span><span class="mf">0.002724710318136713</span><span class="p">),</span><span class="n">函数值为4</span><span class="mf">.594942430634586e-05</span>
+<span class="n">第9次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.00310238</span> <span class="o">-</span><span class="mf">0.00272471</span><span class="p">],</span><span class="n">函数值4</span><span class="mf">.594942430634586e-05</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00310078</span>  <span class="mf">0.0027194</span> <span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.003102384293917133</span><span class="p">,</span><span class="o">-</span><span class="mf">0.002724710318136713</span><span class="p">),</span><span class="n">函数值为4</span><span class="mf">.594942430634586e-05</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.0015519961786471003</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0013650096417566712</span><span class="p">),</span><span class="n">函数值为1</span><span class="mf">.1501307764222609e-05</span>
+<span class="n">第10次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.001552</span>   <span class="o">-</span><span class="mf">0.00136501</span><span class="p">],</span><span class="n">函数值1</span><span class="mf">.1501307764222609e-05</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00155197</span>  <span class="mf">0.0013633</span> <span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.0015519961786471003</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0013650096417566712</span><span class="p">),</span><span class="n">函数值为1</span><span class="mf">.1501307764222609e-05</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.0007760125645807452</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0006833573590382932</span><span class="p">),</span><span class="n">函数值为2</span><span class="mf">.876170796427301e-06</span>
+<span class="n">第11次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.00077601</span> <span class="o">-</span><span class="mf">0.00068336</span><span class="p">],</span><span class="n">函数值2</span><span class="mf">.876170796427301e-06</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00077638</span>  <span class="mf">0.00068256</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.0007760125645807452</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0006833573590382932</span><span class="p">),</span><span class="n">函数值为2</span><span class="mf">.876170796427301e-06</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.00038782252261232794</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0003420795651061589</span><span class="p">),</span><span class="n">函数值为7</span><span class="mf">.186951159695648e-07</span>
+<span class="n">第12次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.00038782</span> <span class="o">-</span><span class="mf">0.00034208</span><span class="p">],</span><span class="n">函数值7</span><span class="mf">.186951159695648e-07</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00038829</span>  <span class="mf">0.0003415</span> <span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.00038782252261232794</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0003420795651061589</span><span class="p">),</span><span class="n">函数值为7</span><span class="mf">.186951159695648e-07</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">0.00019367783660174983</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0001713275717341014</span><span class="p">),</span><span class="n">函数值为1</span><span class="mf">.794039810856684e-07</span>
+<span class="n">第13次迭代</span>
+<span class="n">位置坐标</span><span class="p">[</span> <span class="mf">0.00019368</span> <span class="o">-</span><span class="mf">0.00017133</span><span class="p">],</span><span class="n">函数值1</span><span class="mf">.794039810856684e-07</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00019417</span>  <span class="mf">0.00017081</span><span class="p">]</span>
+<span class="n">原位置为</span><span class="p">(</span><span class="mf">0.00019367783660174983</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0001713275717341014</span><span class="p">),</span><span class="n">函数值为1</span><span class="mf">.794039810856684e-07</span>
+<span class="n">现位置为</span><span class="p">(</span><span class="mf">9.65930640295443e-05</span><span class="p">,</span><span class="o">-</span><span class="mf">8.592325980293392e-05</span><span class="p">),</span><span class="n">函数值为4</span><span class="mf">.4704488332543737e-08</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="第二题图像">第二题图像</h4>
+<p><img src="/img/math/optimization/second_2.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%9C%80%E4%BC%98%E5%8C%96/">最优化</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 Chenk
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.9.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#第一次作业">第一次作业</a>
+      <ol>
+        <li><a href="#黄金分割法求函数-phix1-alpha-e-alpha-2的极小值区间为01epsilon--001">黄金分割法求函数 $\phi(x)=1-\alpha e^{-\alpha ^2}$的极小值，区间为[0,1]，$\epsilon = 0.01$。</a>
+          <ol>
+            <li><a href="#运行结果">运行结果</a></li>
+            <li><a href="#函数图像">函数图像</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用armijio搜索算法计算第k次的搜索步长alpha_k目标函数100x_2-x_1221-x_12">使用Armijio搜索算法计算第k次的搜索步长$\alpha_k$,目标函数$100(x_2-x_1^2)^2+(1-x_1)^2$</a>
+          <ol>
+            <li><a href="#运行结果-1">运行结果</a></li>
+            <li><a href="#函数图像-1">函数图像</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#第二次作业">第二次作业</a>
+      <ol>
+        <li><a href="#阻尼牛顿法">阻尼牛顿法</a>
+          <ol>
+            <li><a href="#扩充函数类">扩充函数类</a></li>
+            <li><a href="#运行程序">运行程序</a></li>
+            <li><a href="#第一题运算结果">第一题运算结果</a></li>
+            <li><a href="#第一题图像展示">第一题图像展示</a></li>
+            <li><a href="#第二题运算结果">第二题运算结果</a></li>
+            <li><a href="#第二题图像">第二题图像</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
